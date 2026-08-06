@@ -1,0 +1,33 @@
+# ==========================================
+# Firmware Build Artifacts (All Projects)
+# ==========================================
+**/build/
+**/Debug/
+**/Release/
+**/*.elf
+**/*.bin
+**/*.hex
+**/*.map
+**/*.su
+**/*.o
+**/*.d
+
+# ==========================================
+# Toolchain & Hardware Debug Logs
+# ==========================================
+**/*.log
+**/.gdb_history
+**/vsc_c_cpp_properties.json
+
+# ==========================================
+# Operating System Junk
+# ==========================================
+.DS_Store
+Thumbs.db
+
+# ==========================================
+# VS Code Configuration (Rules for Portability)
+# ==========================================
+# We want to share tasks and flash routines, but ignore individual workspace states
+**/.vscode/.browse.VC.db
+**/.vscode/project.workspace
