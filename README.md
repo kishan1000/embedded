@@ -1,4 +1,4 @@
-# STM32F401 Black Pill Firmware Portfolio
+# STM32F401 Black Pill Firmware
 
 This repository contains a collection of bare-metal and Low-Layer (LL) driver implementations for the **STM32F401CCU6 Black Pill** development board. The projects are structured chronologically to document my progress in mastering embedded C, register manipulation, and hardware peripheral configuration using VS Code.
 
@@ -70,8 +70,13 @@ To compile and debug any of the sub-projects, ensure you have the following inst
 3. Generate the build files and compile using CMake:
 
    ```bash
-   cmake -B build -G "MinGW Makefiles" # Or use "Unix Makefiles" depending on your OS
-   cmake --build build
+   cmake --build --preset Debug
+   ```
+
+4. Flash the firmware using ST-Link V2:
+
+   ```bash
+   STM32_Programmer_CLI -c port=SWD -w build/Debug/01_BLINK.elf -rst
    ```
 
 ---
