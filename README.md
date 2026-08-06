@@ -42,7 +42,7 @@ embedded/                           # Global Git Repository Root
 │   ├── Core/                       # Application code modifying PC13 outputs
 │   └── Drivers/                    # Copied local LL driver library dependencies
 │
-├── 02_GPIO_INPUT/                  # [Upcoming] Polling and EXTI button reading using 00_STM32 template
+├── 02_GPIO_INPUT/                  # Polling and EXTI button reading 
 └── 03_PWM_GENERATION/              # [Upcoming] Timer configuration basics for LED dimming
 ```
 
@@ -89,3 +89,8 @@ To compile and debug any of the sub-projects, ensure you have the following inst
 * **Key Learnings:**
   * **Clock Gating:** Failing to set the proper bit inside the `RCC->AHB1ENR` register isolates the entire peripheral from receiving clock ticks, rendering any subsequent configuration calls to `GPIOC->MODER` completely useless. On the STM32F401, Port C corresponds to Bit 2 (`1 << 2`).
   * **Active Low Circuitry:** The onboard LED circuit configuration operates inversely to normal logic conventions; pulling the designated pin **LOW** establishes the electrical path to ground, turning the LED **ON**.
+
+### Project 02: 02_GPIO_INPUT
+
+* **Objective:** Toggle the onboard PC13 LED by pressing the button configured on PC15
+* **Key Learnings:**
