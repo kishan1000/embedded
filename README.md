@@ -6,22 +6,22 @@ This repository contains a collection of bare-metal and Low-Layer (LL) driver im
 
 ## 🛠️ Hardware Specification
 
-*   **Microcontroller:** STM32F401CCU6 (ARM Cortex-M4 with FPU)
-*   **Core Clock:** 16 MHz HSI (Internal High-Speed Oscillator default setup)
-*   **Flash Memory:** 256 KB
-*   **SRAM:** 64 KB
-*   **Onboard LED:** PC13 (**Active Low** — turns ON when pin is cleared, OFF when pin is set)
-*   **Onboard Key:** PA0 / NRST
+* **Microcontroller:** STM32F401CCU6 (ARM Cortex-M4 with FPU)
+* **Core Clock:** 16 MHz HSI (Internal High-Speed Oscillator default setup)
+* **Flash Memory:** 256 KB
+* **SRAM:** 64 KB
+* **Onboard LED:** PC13 (**Active Low** — turns ON when pin is cleared, OFF when pin is set)
+* **Onboard Key:** PA0 / NRST
 
 ---
 
 ## 💻 Development Toolchain
 
-*   **IDE/Editor:** VS Code (Multi-Root Workspace setup)
-*   **Code Generator:** STM32CubeMX (Configured for LL Driver generation)
-*   **Compiler:** GNU Arm Embedded Toolchain (`arm-none-eabi-gcc`)
-*   **Build System:** CMake / Makefile
-*   **Flash & Debugger:** ST-Link V2 (via Cortex-Debug extension and OpenOCD)
+* **IDE/Editor:** VS Code (Multi-Root Workspace setup)
+* **Code Generator:** STM32CubeMX (Configured for LL Driver generation)
+* **Compiler:** GNU Arm Embedded Toolchain (`arm-none-eabi-gcc`)
+* **Build System:** CMake / Makefile
+* **Flash & Debugger:** ST-Link V2 (via Cortex-Debug extension and OpenOCD)
 
 ---
 
@@ -53,6 +53,7 @@ embedded/                           # Global Git Repository Root
 ### Prerequisites
 
 To compile and debug any of the sub-projects, ensure you have the following installed on your machine:
+
 1. `arm-none-eabi-gcc` toolchain added to your system environment variables.
 2. `CMake` (version 3.20+) or standard `make` utility.
 3. `OpenOCD` (for hardware flashing through ST-Link).
@@ -61,10 +62,13 @@ To compile and debug any of the sub-projects, ensure you have the following inst
 
 1. Double-click and open the `stm32-portfolio.code-workspace` file in VS Code.
 2. Open your terminal and change directory to the targeted project folder:
+
    ```bash
    cd 01_BLINK
    ```
+
 3. Generate the build files and compile using CMake:
+
    ```bash
    cmake -B build -G "MinGW Makefiles" # Or use "Unix Makefiles" depending on your OS
    cmake --build build
@@ -75,8 +79,8 @@ To compile and debug any of the sub-projects, ensure you have the following inst
 ## 📝 Learning Logs & Insights
 
 ### Project 01: BLINK
-*   **Objective:** Toggle the onboard PC13 LED using direct register definitions combined with standard LL utility helper delays.
-*   **Key Learnings:** 
-    *   **Clock Gating:** Failing to set the proper bit inside the `RCC->AHB1ENR` register isolates the entire peripheral from receiving clock ticks, rendering any subsequent configuration calls to `GPIOC->MODER` completely useless. On the STM32F401, Port C corresponds to Bit 2 (`1 << 2`).
-    *   **Typo Traps:** Confusing assignment operators (like using `!=` instead of `|=`) compiles successfully without throwing an error but silently halts expected register changes.
-    *   **Active Low Circuitry:** The onboard LED circuit configuration operates inversely to normal logic conventions; pulling the designated pin **LOW** establishes the electrical path to ground, turning the LED **ON**.
+
+* **Objective:** Toggle the onboard PC13 LED using direct register definitions combined with standard LL utility helper delays.
+* **Key Learnings:**
+  * **Clock Gating:** Failing to set the proper bit inside the `RCC->AHB1ENR` register isolates the entire peripheral from receiving clock ticks, rendering any subsequent configuration calls to `GPIOC->MODER` completely useless. On the STM32F401, Port C corresponds to Bit 2 (`1 << 2`).
+  * **Active Low Circuitry:** The onboard LED circuit configuration operates inversely to normal logic conventions; pulling the designated pin **LOW** establishes the electrical path to ground, turning the LED **ON**.
