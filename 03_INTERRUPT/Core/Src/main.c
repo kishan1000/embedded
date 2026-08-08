@@ -101,11 +101,12 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
+  // Enabling clock and setting GPIO PIN C and OUTPUT PIN 13
   RCC->AHB1ENR |= 1 << OUTPUT_PORT;
-
   GPIOC->MODER &= ~(3 << OUTPUT_PIN*2);
   GPIOC->MODER |= 1 << (OUTPUT_PIN*2);
-
+  
+  // Enabling clock and setting GPIO PIN A and INPUT PIN 4
   RCC->AHB1ENR |= 1 << INPUT_PORT;
   GPIOA->MODER &= ~(3 << INPUT_PIN*2);
   GPIOA->PUPDR &= ~(3 << (INPUT_PIN*2));
@@ -113,7 +114,7 @@ int main(void)
 
   // Setting SYSCFG
   RCC->APB2ENR |= 1 << 14; // Enbale clock for SYSCFG (RCC_APB2ENR_SYSCFGEN)
-  SYSCFG->EXTICR[1] &= ~(15 << (0*4)); // Setting memory map for PA4
+  SYSCFG->EXTICR[1] &= ~(15 << (0*4)); // Setting Interrupt Line 4 for PA4
 
   // Setting EXTI peripheral for PA4
   EXTI->IMR |= 1 << INTERRUPT_LINE;
@@ -135,6 +136,8 @@ int main(void)
   /* USER CODE END 3 */
 }
 
+// Interrupt Handler for EXTI4
+// Interupt coming from PA4
 void EXTI4_IRQHandler(void)
 {
   if(EXTI->PR & (1 << INTERRUPT_LINE))
